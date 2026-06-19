@@ -6,12 +6,40 @@ import {
   SidebarContent,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Users,
+  BarChart3,
+  Settings,
+  LogIn,
+} from "lucide-react";
+
+const pages = [
+  { path: "/", label: "Dashboard", icon: <LayoutDashboard /> },
+  { path: "analytics", label: "Analytics", icon: <BarChart3 /> },
+  { path: "users", label: "Users", icon: <Users /> },
+  { path: "settings", label: "Settings", icon: <Settings /> },
+  { path: "login", label: "Login", icon: <LogIn /> },
+];
 
 function AppLayout() {
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarContent>NovaDesk</SidebarContent>
+        <SidebarContent>
+          <h2 className="px-2 mt-2">NovaDesk</h2>
+          {pages.map((item) => (
+            <NavLink
+              to={item.path}
+              key={item.path}
+              className="flex gap-2 items-center w-full px-2 py-4"
+            >
+              <span>{item.icon}</span>
+              <span>{item.label}</span>
+            </NavLink>
+          ))}
+        </SidebarContent>
       </Sidebar>
       <SidebarTrigger />
       <main>
