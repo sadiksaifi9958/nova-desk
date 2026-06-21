@@ -7,6 +7,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { useQuery } from "@tanstack/react-query";
 
 const users = [
   {
@@ -46,37 +47,53 @@ const users = [
   },
 ];
 
+async function fetchUsers() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(users);
+    }, 1000);
+  });
+}
+
 function Users() {
-  return (
-    <div className="w-full">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead>Status</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {users.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.email}</TableCell>
-              <TableCell>{item.role}</TableCell>
-              <TableCell>
-                <Badge
-                  variant={item.status === "Active" ? "default" : "secondary"}
-                >
-                  {item.status}
-                </Badge>
-              </TableCell>
+  const { data, isLoading } = useQuery({
+    queryKey: ["users"],
+    queryFn: fetchUsers,
+  });
+  if (isLoading) {
+    return <p>Loading users..</p>;
+  } else {
+    return (
+      <div className="w-full">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  );
+          </TableHeader>
+          <TableBody>
+            {data.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.email}</TableCell>
+                <TableCell>{item.role}</TableCell>
+                <TableCell>
+                  <Badge
+                    variant={item.status === "Active" ? "default" : "secondary"}
+                  >
+                    {item.status}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  }
 }
 
 export default Users;

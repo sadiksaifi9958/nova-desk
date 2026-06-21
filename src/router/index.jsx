@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       {
         path: "",
         element: (
-          <Suspense fallback={<div>...Loading</div>}>
+          <Suspense fallback={<div>Loading page..</div>}>
             <Dashboard />
           </Suspense>
         ),
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       {
         path: "analytics",
         element: (
-          <Suspense fallback={<div>...Loading</div>}>
+          <Suspense fallback={<div>Loading page..</div>}>
             <Analytics />
           </Suspense>
         ),
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: (
-          <Suspense fallback={<div>...Loading</div>}>
+          <Suspense fallback={<div>Loading page..</div>}>
             <Login />
           </Suspense>
         ),
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       {
         path: "settings",
         element: (
-          <Suspense fallback={<div>...Loading</div>}>
+          <Suspense fallback={<div>Loading page..</div>}>
             <Settings />
           </Suspense>
         ),
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: (
-          <Suspense fallback={<div>...Loading</div>}>
+          <Suspense fallback={<div>Loading page..</div>}>
             <Users />
           </Suspense>
         ),
