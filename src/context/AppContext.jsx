@@ -4,8 +4,8 @@ const AppContext = createContext();
 
 const initialState = {
   theme: localStorage.getItem("theme") || "light",
-  user: null,
-  isAuthenticated: false,
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
 };
 
 function appReducer(state, action) {
@@ -32,6 +32,11 @@ export function AppProvider({ children }) {
     }
     localStorage.setItem("theme", state.theme);
   }, [state.theme]);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(state.user));
+    localStorage.setItem("isAuthenticated", state.isAuthenticated);
+  }, [state.user, state.isAuthenticated]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
