@@ -1,37 +1,37 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
-const revenueData = [
-  { month: "Jan", revenue: 4000 },
-  { month: "Feb", revenue: 3200 },
-  { month: "Mar", revenue: 5100 },
-  { month: "Apr", revenue: 4700 },
-  { month: "May", revenue: 6200 },
-  { month: "Jun", revenue: 7300 },
+const trafficData = [
+  { month: "Jan", visitors: 1200 },
+  { month: "Feb", visitors: 1450 },
+  { month: "Mar", visitors: 1100 },
+  { month: "Apr", visitors: 1800 },
+  { month: "May", visitors: 2100 },
+  { month: "Jun", visitors: 2600 },
 ];
 
 function Analytics() {
   return (
-    <div>
+    <div className="w-full">
       <Card>
         <CardHeader>
-          <CardTitle>Revenue Overview</CardTitle>
+          <CardTitle>Website Traffic</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={revenueData}>
+            <LineChart data={trafficData}>
               <XAxis dataKey="month"></XAxis>
               <YAxis></YAxis>
               <Tooltip></Tooltip>
-              <Bar dataKey="revenue"></Bar>
-            </BarChart>
+              <Line dataKey="visitors"></Line>
+            </LineChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
