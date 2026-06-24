@@ -27,13 +27,15 @@ function AppLayout() {
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarContent>
+        <SidebarContent className="mx-2">
           <h2 className="px-2 mt-2">NovaDesk</h2>
           {pages.map((item) => (
             <NavLink
               to={item.path}
               key={item.path}
-              className="flex gap-2 items-center w-full px-2 py-4"
+              className={({ isActive }) =>
+                `flex gap-2 items-center w-full px-2 py-4 rounded-md ${isActive ? "bg-secondary font-semibold" : ""}`
+              }
             >
               <span>{item.icon}</span>
               <span>{item.label}</span>
