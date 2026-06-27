@@ -26,7 +26,7 @@ const pages = [
 function AppLayout() {
   return (
     <SidebarProvider>
-      <Sidebar>
+      <Sidebar collapsible="icon">
         <SidebarContent className="mx-2">
           <h2 className="px-2 mt-2">NovaDash</h2>
           {pages.map((item) => (
