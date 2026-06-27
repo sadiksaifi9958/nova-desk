@@ -3,8 +3,15 @@ import { useSidebarStore } from "@/store/useSidebarStore";
 import {
   SidebarProvider,
   Sidebar,
+  SidebarHeader,
   SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { NavLink } from "react-router-dom";
 import {
@@ -23,26 +30,40 @@ const pages = [
   { path: "profile", label: "Profile", icon: <User /> },
 ];
 
+function SidebarNav() {
+  const { state } = useSidebar();
+
+  return (
+    <Sidebar collapsible="icon">
+      <SidebarHeader>{state === "expanded" ? "NovaDash" : "ND"}</SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarMenu className="gap-2">
+            {pages.map((item) => (
+              <SidebarMenuItem key={item.path}>
+                <SidebarMenuButton asChild>
+                  <NavLink
+                    to={item.path}
+                    className="flex gap-2 items-center w-full px-2 py-4 rounded-md"
+                  >
+                    <span>{item.icon}</span>
+                    <span>{item.label}</span>
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+  );
+}
+
 function AppLayout() {
   return (
     <SidebarProvider>
-      <Sidebar collapsible="icon">
-        <SidebarContent className="mx-2">
-          <h2 className="px-2 mt-2">NovaDash</h2>
-          {pages.map((item) => (
-            <NavLink
-              to={item.path}
-              key={item.path}
-              className={({ isActive }) =>
-                `flex gap-2 items-center w-full px-2 py-4 rounded-md ${isActive ? "bg-zinc-200 dark:bg-zinc-700 font-semibold" : ""}`
-              }
-            >
-              <span>{item.icon}</span>
-              <span>{item.label}</span>
-            </NavLink>
-          ))}
-        </SidebarContent>
-      </Sidebar>
+      <SidebarNav />
       <SidebarTrigger />
       <main className="flex-1 p-6">
         <Outlet />
